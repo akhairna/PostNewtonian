@@ -59,7 +59,7 @@ class NotebookLoader(object):
         import io, sys, types
         from IPython.nbformat import current
         path = find_notebook(fullname, self.path)
-        print ("importing IPython notebook from %s" % path)
+        print(("importing IPython notebook from %s" % path))
         # load the notebook object
         with io.open(path, 'r', encoding='utf-8') as f:
             nb = current.read(f, 'json')
@@ -80,7 +80,7 @@ class NotebookLoader(object):
                 # transform the input to executable Python
                 code = self.shell.input_transformer_manager.transform_cell(cell.input)
                 # run the code in themodule
-                exec code in mod.__dict__
+                exec(code, mod.__dict__)
         finally:
             self.shell.user_ns = save_user_ns
         return mod
